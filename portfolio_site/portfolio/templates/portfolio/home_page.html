@@ -59,4 +59,40 @@
     </div>
 </section>
 {% endif %}
+
+<!-- CONTACT SECTION -->
+<section class="contact">
+    <div class="container">
+        <h2>Contact</h2>
+
+        {% if page.phone_number %}
+        <p>
+            <i class="fa-solid fa-phone"></i>
+            <strong> Telefoon:</strong>
+            <a href="tel:{{ page.phone_number }}">{{ page.phone_number }}</a>
+        </p>
+        {% endif %}
+
+        {% if page.email %}
+        <p>
+            <i class="fa-solid fa-envelope"></i>
+            <strong> E-mail:</strong>
+            <a href="mailto:{{ page.email }}">{{ page.email }}</a>
+        </p>
+        {% endif %}
+
+        {% if page.linkedin_url %}
+        <p>
+            <i class="fa-brands fa-linkedin"></i>
+            <strong> LinkedIn:</strong>
+            <a href="{{ page.linkedin_url }}" target="_blank" rel="noopener">
+                {{ page.linkedin_url }}
+            </a>
+        </p>
+        {% endif %}
+    </div>
+</section>
+
+
+
 {% endblock %}

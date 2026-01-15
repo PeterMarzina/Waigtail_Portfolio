@@ -32,6 +32,7 @@ class Technology(models.Model):
         verbose_name_plural = 'Technologieën'
         ordering = ['name']
 
+
 class ProjectIndexPage(Page):
     intro = RichTextField(blank=True, help_text="Korte tekst over je projecten", verbose_name="Beschrijving")
 
@@ -39,15 +40,14 @@ class ProjectIndexPage(Page):
         FieldPanel('intro'),
     ]
 
-    # Alleen ProjectPage als kinderen toestaan
     subpage_types = ['portfolio.ProjectPage']
-
-    max_count = 1  # Beperk tot één instantie
+    max_count = 1
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['projects'] = ProjectPage.objects.live().child_of(self).order_by('-first_published_at')
         return context
+
 
 class HomePage(Page):
     hero_title = models.CharField(max_length=100, help_text="Hoofd titel", verbose_name="Titel", default="Welkom op mijn portfolio")
@@ -61,19 +61,32 @@ class HomePage(Page):
     cta_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True, on_delete=models.SET_NULL, related_name='+', verbose_name="CTA link naar pagina")
     cta_url = models.URLField(blank=True, verbose_name="CTA externe URL")
 
+    # CONTACT FIELDS (added)
+    phone_number = models.CharField(max_length=50, blank=True, verbose_name="Telefoonnummer", help_text="Je telefoonnummer")
+    email = models.EmailField(blank=True, verbose_name="E-mail", help_text="Je e-mailadres")
+    linkedin_url = models.URLField(blank=True, verbose_name="LinkedIn URL", help_text="Link naar je LinkedIn profiel")
+
     content_panels = Page.content_panels + [
         MultiFieldPanel([
             FieldPanel('hero_title'),
             FieldPanel('hero_subtitle'),
             FieldPanel('hero_image'),
         ], heading="Hero sectie"),
+
         FieldPanel('intro_text'),
         FieldPanel('featured_projects_title'),
+
         MultiFieldPanel([
             FieldPanel('cta_text'),
             FieldPanel('cta_page'),
             FieldPanel('cta_url'),
         ], heading="Call to Action"),
+
+        MultiFieldPanel([
+            FieldPanel('phone_number'),
+            FieldPanel('email'),
+            FieldPanel('linkedin_url'),
+        ], heading="Contactgegevens"),
     ]
 
     parent_page_types = ['wagtailcore.Page']

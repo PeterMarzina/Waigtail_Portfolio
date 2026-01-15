@@ -288,3 +288,49 @@ body {
         gap: 1rem;
     }
 }
+
+    /* Contact section */
+    .contact {
+        padding: 6rem 0;
+        background: #f8f9fa;
+    } 
+     
+
+    .contact .container {
+        max-width: 900px;
+        text-align: center;
+    }
+
+    .contact h2 {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: #2c3e50;
+        font-weight: 700;
+    }
+
+    .contact p {
+        font-size: 1.4rem;
+        margin: 1.5rem 0;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .contact i {
+        color: #1976D2;
+        font-size: 2rem;
+    }
+
+    .contact a {
+        color: #1976D2;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+    .contact a:hover {
+        color: #0d47a1;
+    }
+
