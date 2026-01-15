@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>{{ page.hero_title }}</h1>
+            {% if page.hero_subtitle %}
+            <p class="hero-subtitle">{{ page.hero_subtitle }}</p>
+            {% endif %}
+        </div>
+        {% if page.hero_image %}
+        <div class="hero-image">
+            {% image page.hero_image original %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% if page.intro_text %}
+<section class="intro">
+    <div class="container">
+        <div class="intro-content">
+            {{ page.intro_text|richtext }}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if featured_projects %}
+<section class="featured-projects">
+    <div class="container">
+        <h2>{{ page.featured_projects_title }}</h2>
+        <div class="projects-grid">
+            {% for project in featured_projects %}
+            <div class="project-card">
+                {% if project.featured_image %}
+                <div class="project-image">
+                    {% image project.featured_image fill-400x300 %}
+                </div>
+                {% endif %}
+                <div class="project-content">
+                    <h3><a href="{% pageurl project %}">{{ project.title }}</a></h3>
+                    <p>{{ project.intro }}</p>
+                    {% if project.technologies.all %}
+                    <div class="project-tech">
+                        {% for tech in project.technologies.all %}
+                        <span class="tech-tag">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

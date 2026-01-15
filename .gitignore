@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Virtual environment
+venv/
+env/
+
+# Django/Wagtail
+*.sqlite3
+/staticfiles/
+media/
+*.log

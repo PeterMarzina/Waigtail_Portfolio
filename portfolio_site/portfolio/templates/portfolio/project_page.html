@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-projectpage{% endblock %}
+
+{% block content %}
+    <article class="project-detail">
+        <header class="project-header">
+            <div class="container">
+                <h1>{{ page.title }}</h1>
+                {% if page.project_date %}
+                    <time datetime="{{ page.project_date|date:'Y-m-d' }}">
+                        {{ page.project_date|date:"F Y" }}
+                    </time>
+                {% endif %}
+                
+                {% if page.technologies.all %}
+                    <div class="technologies">
+                        {% for tech in page.technologies.all %}
+                            <span class="tech-tag">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </header>
+
+        {% if page.featured_image %}
+            <div class="featured-image">
+                {% image page.featured_image width-1200 %}
+            </div>
+        {% endif %}
+
+        <div class="container">
+            <div class="project-intro">
+                <p class="lead">{{ page.intro }}</p>
+            </div>
+
+            {% if page.github_url or page.live_url %}
+                <div class="project-links">
+                    {% if page.github_url %}
+                        <a href="{{ page.github_url }}" target="_blank" rel="noopener" class="btn btn-outline">
+                            View on GitHub
+                        </a>
+                    {% endif %}
+                    {% if page.live_url %}
+                        <a href="{{ page.live_url }}" target="_blank" rel="noopener" class="btn btn-primary">
+                            View Live Site
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="project-body">
+                {% for block in page.body %}
+                    {% include_block block %}
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+{% endblock %}

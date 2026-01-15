@@ -1,0 +1,12 @@
+<div class="block-two-columns">
+    <div class="column">
+        {% for block in value.left_column %}
+            {% include_block block %}
+        {% endfor %}
+    </div>
+    <div class="column">
+        {% for block in value.right_column %}
+            {% include_block block %}
+        {% endfor %}
+    </div>
+</div>
