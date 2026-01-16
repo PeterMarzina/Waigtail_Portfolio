@@ -10,7 +10,6 @@ venv/
 env/
 
 # Django/Wagtail
-*.sqlite3
 /staticfiles/
 media/
 *.log
